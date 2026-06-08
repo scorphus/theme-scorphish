@@ -88,8 +88,8 @@ function _git_dirty_remotes -a remote_color -a ahead_color
   set current_branch (command git rev-parse --abbrev-ref HEAD 2> /dev/null)
   set current_ref (command git rev-parse HEAD 2> /dev/null)
 
-  for remote in (git remote | grep 'origin\|upstream')
-
+  for remote in (command git remote)
+    contains $remote origin upstream; or continue
     set -l git_ahead_count (_git_ahead_count $remote $current_branch)
 
     set remote_branch "refs/remotes/$remote/$current_branch"
