@@ -81,8 +81,7 @@ function _is_git_dirty
 end
 
 function _git_ahead_count -a remote -a branch_name
-  echo (command git log $remote/$branch_name..HEAD 2> /dev/null | \
-    grep '^commit' | wc -l | tr -d ' ')
+  command git rev-list --count $remote/$branch_name..HEAD 2> /dev/null
 end
 
 function _git_dirty_remotes -a remote_color -a ahead_color
